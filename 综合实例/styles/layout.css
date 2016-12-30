@@ -94,3 +94,26 @@ article img {
   border-width: 0;
   outline-width: 0;
 }
+#imagegallery li {
+  display: inline;
+}
+td {
+  padding: .5em 3em;
+}
+th {
+  color: #edc;
+  background-color: #445;
+}
+tr td {
+  color: #223;
+  background-color: #eb6;
+}
+dl {
+  overflow: hidden;
+}
+dt {
+  float: left;
+}
+dd {
+  float: left;
+}
