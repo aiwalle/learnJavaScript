@@ -440,13 +440,37 @@ function submitFormWithAjax(whichform, thetarget) {
   return true;
 }
 
-addLoadEvent(prepareForms);
-addLoadEvent(focusLabels);
-addLoadEvent(displayAbbreviations);
-addLoadEvent(highlightRows);
-addLoadEvent(stripeTables);
-addLoadEvent(preparePlaceholder);
-addLoadEvent(prepareGallery);
-addLoadEvent(prepareInternalnav);
-addLoadEvent(prepareSlideshow);
+
+
+
+// addLoadEvent(prepareForms);
+// addLoadEvent(focusLabels);
+// addLoadEvent(displayAbbreviations);
+// addLoadEvent(highlightRows);
+// addLoadEvent(stripeTables);
+// addLoadEvent(preparePlaceholder);
+// addLoadEvent(prepareGallery);
+// addLoadEvent(prepareInternalnav);
+// addLoadEvent(prepareSlideshow);
+// addLoadEvent(highlightPage);
+
+function loadEvents() {
+  // home
+  prepareSlideshow();
+  // about
+  prepareInternalnav();
+  // photos
+  preparePlaceholder();
+  prepareGallery();
+  // live
+  stripeTables();
+  highlightRows();
+  displayAbbreviations();
+  // contact
+  focusLabels();
+  prepareForms();
+}
+
+// Load events
 addLoadEvent(highlightPage);
+addLoadEvent(loadEvents);
