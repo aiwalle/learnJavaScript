@@ -439,19 +439,47 @@
 
 // 6.2.7稳妥构造函数模式
 // 适合在一些安全的环境中使用，这些环境中禁止使用this和new
-function Person(name, age, job) {
-  // 创建要返回的对象
-  var o = new Object();
-  // 可以再这里定义私有变量和函数
+// 使用这种方法创建的对象与构造函数之间没有什么关系
+// function Person(name, age, job) {
+//   // 创建要返回的对象
+//   var o = new Object();
+//   // 可以再这里定义私有变量和函数
+//
+//   // 添加方法
+//   o.sayName = function() {
+//     alert(name);
+//   };
+//
+//   // 返回对象
+//   return o;
+// }
+//
+// var friend = new Person("Nicholas", 29, "Software Engineer");
+// friend.sayName();   // Nicholas
 
-  // 添加方法
-  o.sayName = function() {
-    alert(name);
-  };
 
-  // 返回对象
-  return o;
+
+
+
+//6.3.1 原型链
+function SuperType() {
+  this.property = true;
 }
 
-var friend = new Person("Nicholas", 29, "Software Engineer");
-friend.sayName();   // Nicholas
+SuperType.prototype.getSuperValue = function() {
+  return this.property;
+};
+
+function SubType() {
+  this.subproperty = false;
+}
+// 继承了SuperType
+SubType.prototype = new SuperType();
+
+SubType.prototype.getSubValue = function() {
+  return this.subproperty;
+};
+
+
+var instance = new SubType();
+alert(instance.getSuperValue());
