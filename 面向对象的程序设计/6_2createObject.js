@@ -456,30 +456,3 @@
 //
 // var friend = new Person("Nicholas", 29, "Software Engineer");
 // friend.sayName();   // Nicholas
-
-
-
-
-
-//6.3.1 原型链
-function SuperType() {
-  this.property = true;
-}
-
-SuperType.prototype.getSuperValue = function() {
-  return this.property;
-};
-
-function SubType() {
-  this.subproperty = false;
-}
-// 继承了SuperType
-SubType.prototype = new SuperType();
-
-SubType.prototype.getSubValue = function() {
-  return this.subproperty;
-};
-
-
-var instance = new SubType();
-alert(instance.getSuperValue());
