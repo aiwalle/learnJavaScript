@@ -198,17 +198,16 @@
 
 
 // 6.3.4 原型式继承
-// 下面的这种方法已过期
 // var person = {
 //   name: "Nicholas",
 //   friends: ["Shelby", "Court", "Van"]
 // };
 //
-// var anotherPerson = object(person);
+// var anotherPerson = Object.create(person);
 // anotherPerson.name = "Grey";
 // anotherPerson.friends.push("Rob");
 //
-// var yetAnotherPerson = object(person);
+// var yetAnotherPerson = Object.create(person);
 // yetAnotherPerson.name = "Linda";
 // yetAnotherPerson.friends.push("Barbie");
 // alert(person.friends);
@@ -246,9 +245,8 @@
 
 
 // 6.3.5寄生式继承
-// object方法已过期
 // function createAnother(original) {
-//   var clone = object(original);
+//   var clone = Object.create(original);
 //   clone.sayHi = function() {
 //     alert("hi");
 //   };
@@ -266,9 +264,11 @@
 
 
 // 6.3.6寄生组合式继承
+// 这个方法的高效率体现在只调用了一次SuperType构造函数，并且因此避免了在SubType.prototype上面创建不必要多余的属性
+// 同时，原型链是保持不变的，还是能够正常使用instanceof和isPrototypeOf
 function SuperType(name) {
   this.name = name;
-  thiscolors = ["red", "blue", "green"];
+  this.colors = ["red", "blue", "green"];
 }
 SuperType.prototype.sayName = function() {
   alert(this.name);
@@ -281,13 +281,16 @@ function SubType(name, age) {
 
 // SubType.prototype = new SuperType();            // 第一次调用SuperType()
 // SubType.prototype.constructor = SubType;
-inheritProtorype(SubType, SuperType);
+inheritPrototype(SubType, SuperType);
 SubType.prototype.sayAge = function() {
   alert(this.age);
 };
 
-function inheritProtorype(subType, superType) {
-  var prototype = object(superType.prototype);    // 创建对象
+function inheritPrototype(subType, superType) {
+  var prototype = Object.create(superType.prototype);    // 创建对象
   prototype.constructor = subType;                // 增强对象
   subType.prototype = prototype;                  // 指定对象
 }
+
+var instance = new SubType("Nicholas", 29);
+alert(instance.colors);
