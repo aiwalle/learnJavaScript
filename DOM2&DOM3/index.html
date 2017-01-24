@@ -56,17 +56,52 @@
 
 
     // 鼠标滚轮
-    EventUtil.addHandler(document, "mousewheel", function(event) {
+    // EventUtil.addHandler(document, "mousewheel", function(event) {
+    //   event = EventUtil.getEvent(event);
+    //   alert(event.wheelDelta);
+    // });
+    //
+    // // 字符编码
+    // var textbox = document.getElementById("myText");
+    // EventUtil.addHandler(textbox, "keypress", function(event) {
+    //   event = EventUtil.getEvent(event);
+    //   alert(EventUtil.getCharCode(event));
+    // })
+
+    // DOM3级变化(不用)
+    // var textbox = document.getElementById("myText");
+    // EventUtil.addHandler(textbox, "keypress", function(event) {
+    //   event = EventUtil.getEvent(event);
+    //   var identifier = event.key || event.keyIdentifier;
+    //   if (identifier) {
+    //     alert(identifier);
+    //   }
+    // })
+
+    // textInput事件
+    // var textbox = document.getElementById("myText");
+    // EventUtil.addHandler(textbox, "textInput", function(event) {
+    //   event = EventUtil.getEvent(event);
+    //   alert(event.data);
+    // })
+
+    // 复合事件
+    var textbox = document.getElementById("myText");
+    EventUtil.addHandler(textbox, "compositionstart", function(event) {
       event = EventUtil.getEvent(event);
-      alert(event.wheelDelta);
+      alert(event.data);
     });
 
-    // 字符编码
-    var textbox = document.getElementById("myText");
-    EventUtil.addHandler(textbox, "keypress", function(event) {
+    EventUtil.addHandler(textbox, "compositionupdate", function(event) {
       event = EventUtil.getEvent(event);
-      alert(EventUtil.getCharCode(event));
+      alert(event.data);
+    });
+
+    EventUtil.addHandler(textbox, "compositionend", function(event) {
+      event = EventUtil.getEvent(event);
+      alert(event.data);
     })
+
 
     </script>
   </body>

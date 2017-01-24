@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>contextmenu</title>
+    <script src="EventUtil.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id="myDiv">Right click or Ctrl+click me to get a custom context menu. Click anywhere else to get the default context menu.</div>
+    <ul id="myMenu" style="position:absolute;visibility:hidden;background-color:silver">
+        <li><a href="http://www.nczonline.net">Nicholas' site</a></li>
+        <li><a href="http://www.wrox.com">Wrox site</a></li>
+        <li><a href="http://www.yahoo.com">Yahoo!</a></li>
+    </ul>
+    <script type="text/javascript">
+    // contextmenu 事件
+    EventUtil.addHandler(window, "load", function(event) {
+      var div = document.getElementById("myDiv");
+
+      EventUtil.addHandler(div, "contextmenu", function(event) {
+        event = EventUtil.getEvent(event);
+        EventUtil.preventDefault(event);
+
+        var menu = document.getElementById("myMenu");
+        menu.style.left = event.clientX + "px";
+        menu.style.top = event.clientY + "px";
+        menu.style.visibility = "visible";
+      });
+      EventUtil.addHandler(document, "click", function(event) {
+        document.getElementById("myMenu").style.visibility = "hidden";
+      });
+    });
+
+    // beforeunload 事件 也就是卸载前，关闭前，刷新前
+    EventUtil.addHandler(window, "beforeunload", function(event) {
+      event = EventUtil.getEvent(event);
+      var message = "I'm really going to miss you if you go.";
+      event.returnValue = message;
+      return message;
+    });
+
+    // DOMContentLoaded事件
+    EventUtil.addHandler(document, "DOMContentLoaded", function(event) {
+      alert("Content loaded");
+    });
+
+    // readystatechange 事件
+    EventUtil.addHandler(document, "readystatechange", function(event) {
+      if (document.readyState == "interactive") {
+        alert("ContentReady loaded");
+      }
+    });
+
+    // pageshow
+    // (function() {
+    //   var showCount = 0;
+    //   EventUtil.addHandler(window, "load", function() {
+    //     alert("load fired");
+    //   });
+    //   EventUtil.addHandler(window, "pageshow", function() {
+    //     showCount++;
+    //     alert("Show has been fired " + showCount + " times.");
+    //   })
+    // })();
+
+    EventUtil.addHandler(window, "hashchange", function(event) {
+      alert("Old URL: " + event.oldURL + "\nNew URL: " + event.newURL);
+    });
+
+    </script>
+  </body>
+</html>
