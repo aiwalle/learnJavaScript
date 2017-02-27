@@ -86,21 +86,28 @@
     // })
 
     // 复合事件
-    var textbox = document.getElementById("myText");
-    EventUtil.addHandler(textbox, "compositionstart", function(event) {
-      event = EventUtil.getEvent(event);
-      alert(event.data);
+    // var textbox = document.getElementById("myText");
+    // EventUtil.addHandler(textbox, "compositionstart", function(event) {
+    //   event = EventUtil.getEvent(event);
+    //   alert(event.data);
+    // });
+    //
+    // var textbox = document.getElementById("myText");
+    // EventUtil.addHandler(textbox, "compositionupdate", function(event) {
+    //   event = EventUtil.getEvent(event);
+    //   alert(event.data);
+    // });
+
+    var image = new Image();
+    EventUtil.addHandler(image, "load", function(event) {
+      alert("Image loaded!");
     });
 
-    EventUtil.addHandler(textbox, "compositionupdate", function(event) {
-      event = EventUtil.getEvent(event);
-      alert(event.data);
+    EventUtil.addHandler(image, "error", function(event) {
+      alert("Image not loaded!");
     });
 
-    EventUtil.addHandler(textbox, "compositionend", function(event) {
-      event = EventUtil.getEvent(event);
-      alert(event.data);
-    })
+    image.src = "smilex.gif";
 
 
     </script>
